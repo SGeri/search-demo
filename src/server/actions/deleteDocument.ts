@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { client, index } from "../services/elastic";
 
 export default async function deleteDocument(documentId: string) {
@@ -9,6 +10,8 @@ export default async function deleteDocument(documentId: string) {
     index,
     id: documentId,
   });
+
+  revalidatePath("/");
 
   return { success: true };
 }

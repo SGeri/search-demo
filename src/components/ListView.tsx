@@ -3,6 +3,8 @@ import { Document } from "@/types";
 import RemoveButton from "./RemoveButton";
 
 async function getDocuments() {
+  await client.indices.refresh({ index });
+
   const { hits } = await client.search<Document>({
     index,
     query: {

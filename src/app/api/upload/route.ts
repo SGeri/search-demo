@@ -16,6 +16,8 @@ export async function POST(req: Request) {
 
   const text = await extractText(body.type, buffer);
 
+  await client.indices.refresh({ index });
+
   await client.index({
     index,
     document: {
