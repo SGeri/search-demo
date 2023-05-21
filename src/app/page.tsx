@@ -1,21 +1,7 @@
 import ListView from "@/components/ListView";
 import Picker from "@/components/Picker";
 import Prompt from "@/components/Prompt";
-import { client, index } from "@/server/services/elastic";
-import { type Document } from "@/types";
-
-async function getDocuments() {
-  await client.indices.refresh({ index });
-
-  const { hits } = await client.search<Document>({
-    index,
-    query: {
-      match_all: {},
-    },
-  });
-
-  return hits.hits;
-}
+import getDocuments from "@/server/queries/getDocuments";
 
 export default async function Home() {
   const documents = await getDocuments();
