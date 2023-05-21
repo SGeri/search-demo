@@ -11,6 +11,11 @@ export default function Pagination({
   pageSize,
   onPageChange,
 }: Props) {
+  const offset = page * pageSize;
+
+  const from = offset + 1;
+  const to = offset + pageSize > total ? total : offset + pageSize;
+
   return (
     <div>
       <div className="w-max flex flex-row gap-2">
@@ -28,7 +33,7 @@ export default function Pagination({
         </button>
       </div>
       <p>
-        {page * pageSize + 1} - {page * pageSize + 6} / {total}
+        {from} - {to} / {total}
       </p>
     </div>
   );

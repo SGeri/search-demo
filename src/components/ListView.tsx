@@ -1,6 +1,5 @@
 "use client";
 
-import { client, index } from "@/server/services/elastic";
 import { SearchHit } from "@elastic/elasticsearch/lib/api/types";
 import { Document } from "@/types";
 import RemoveButton from "./RemoveButton";
@@ -18,21 +17,13 @@ export default function ListView({ documents }: Props) {
   const offset = page * pageSize;
   const total = documents.length;
 
-  const documentToShow = documents.slice(
-    offset,
-    offset + pageSize > total ? total : offset + pageSize
-  );
+  const documentToShow = documents.slice(offset, offset + pageSize);
 
   const handlePageChange = (newPage: number) => {
     if (newPage > Math.floor(total / pageSize) || newPage < 0) return;
 
     setPage(newPage);
   };
-
-  console.log(page, offset, [
-    offset,
-    offset + pageSize > total ? total : offset + pageSize,
-  ]);
 
   return (
     <div className="flex flex-col gap-2">
