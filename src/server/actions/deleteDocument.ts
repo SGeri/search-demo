@@ -12,6 +12,4 @@ export default async function deleteDocument(documentId: string) {
   });
 
   revalidatePath("/");
-
-  return { success: true };
 }

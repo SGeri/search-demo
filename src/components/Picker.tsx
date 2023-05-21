@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Button from "./Button";
+import uploadDocument from "@/server/actions/uploadDocument";
 
 export default function Picker() {
   const ref = useRef<HTMLInputElement>(null);
@@ -27,16 +28,7 @@ export default function Picker() {
         buffer: Buffer.from(await file.arrayBuffer()).toString("base64"),
       };
 
-      fetch("/api/upload", { method: "POST", body: JSON.stringify(body) })
-        .then((res) => res.json())
-        .then((res) => {
-          console.log("res", res);
-          // todo: reload page - fix this by refreshing the list
-          window.location.reload();
-        })
-        .catch((err) => {
-          console.error("err", err);
-        });
+      await uploadDocument(body);
     }
 
     setLoading(false);

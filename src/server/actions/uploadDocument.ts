@@ -1,3 +1,5 @@
+"use server";
+
 import extractText from "@/server/utils/extract";
 import { NextResponse } from "next/server";
 import { client, index } from "@/server/services/elastic";
@@ -10,8 +12,7 @@ type Input = {
   buffer: string;
 };
 
-export async function POST(req: Request) {
-  const body: Input = await req.json();
+export default async function uploadDocument(body: Input) {
   const buffer = Buffer.from(body.buffer, "base64");
 
   const text = await extractText(body.type, buffer);
@@ -28,6 +29,4 @@ export async function POST(req: Request) {
   });
 
   revalidatePath("/");
-
-  return NextResponse.json({ sucess: true });
 }
