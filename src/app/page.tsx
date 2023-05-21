@@ -1,8 +1,24 @@
 import ListView from "@/components/ListView";
 import Picker from "@/components/Picker";
 import Prompt from "@/components/Prompt";
+import { client, index } from "@/server/services/elastic";
 
-export default function Home() {
+async function getDocuments() {
+  await client.indices.refresh({ index });
+
+  const { hits } = await client.search<Document>({
+    index,
+    query: {
+      match_all: {},
+    },
+  });
+
+  return hits.hits;
+}
+
+export default async function Home() {
+  const documents = await getDocuments();
+
   return (
     <main className="flex flex-col items-center justify-between mx-5 py-8 gap-5">
       <div className="text-center">
@@ -14,9 +30,9 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-2 gap-5">
-        <Block title="Documents">
+        <Block title="Documents" className="h-[650px]">
           {/* @ts-expect-error */}
-          <ListView />
+          <ListView documents={documents} />
         </Block>
         <Block title="Upload">
           <Picker />
