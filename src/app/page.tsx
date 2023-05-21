@@ -2,6 +2,7 @@ import ListView from "@/components/ListView";
 import Picker from "@/components/Picker";
 import Prompt from "@/components/Prompt";
 import { client, index } from "@/server/services/elastic";
+import { type Document } from "@/types";
 
 async function getDocuments() {
   await client.indices.refresh({ index });
@@ -31,7 +32,6 @@ export default async function Home() {
 
       <div className="grid grid-cols-2 gap-5">
         <Block title="Documents" className="h-[650px]">
-          {/* @ts-expect-error */}
           <ListView documents={documents} />
         </Block>
         <Block title="Upload">

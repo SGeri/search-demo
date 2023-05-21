@@ -8,9 +8,7 @@ export default function Prompt() {
   const [loading, setLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [language, setLanguage] = useState("English");
-  const [result, setResult] = useState(
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-  );
+  const [result, setResult] = useState("");
 
   const handleSubmit = async () => {
     setLoading(true);
