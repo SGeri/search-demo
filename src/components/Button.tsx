@@ -1,3 +1,5 @@
+"use client";
+
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
 type ButtonProps = DetailedHTMLProps<

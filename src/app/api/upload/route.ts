@@ -27,5 +27,5 @@ export async function POST(req: Request) {
 
   revalidatePath("/");
 
-  return NextResponse.json({ message: "Hello, World!" });
+  return NextResponse.json({ sucess: true });
 }

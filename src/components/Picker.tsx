@@ -31,11 +31,11 @@ export default function Picker() {
         .then((res) => res.json())
         .then((res) => {
           console.log("res", res);
-          setLoading(false);
+          // todo: reload page - fix this by refreshing the list
+          window.location.reload();
         })
         .catch((err) => {
           console.error("err", err);
-          setLoading(false);
         });
     }
 
@@ -50,7 +50,6 @@ export default function Picker() {
         hidden
         type="file"
         onChange={({ target }) => {
-          console.log(target.files);
           if (target.files) {
             const file = target.files[0];
             setFile(file);
