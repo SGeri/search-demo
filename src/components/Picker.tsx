@@ -36,7 +36,7 @@ export default function Picker() {
   };
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 whitespace-break-spaces">
       <input
         ref={ref}
         hidden
@@ -58,12 +58,16 @@ export default function Picker() {
           <p>Type: {file.type}</p>
         </div>
       ) : (
-        <p>No file selected</p>
+        <p className="text-center">No file selected</p>
       )}
 
-      <Button onClick={handleClick}>{file ? "Remove file" : "Add file"}</Button>
+      <Button onClick={handleClick}>
+        {file ? "Remove selection" : "Select file"}
+      </Button>
 
-      <Button onClick={handleSubmit}>Upload</Button>
+      <Button onClick={handleSubmit} disabled={loading || !file}>
+        Upload
+      </Button>
     </div>
   );
 }

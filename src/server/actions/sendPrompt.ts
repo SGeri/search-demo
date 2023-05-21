@@ -4,9 +4,10 @@ import { Document } from "@/types";
 import { client as elasticClient, index } from "../services/elastic";
 import { client as gptClient } from "../services/gpt";
 
-const language = "English";
-
-export default async function sendPrompt(prompt: string): Promise<string> {
+export default async function sendPrompt(
+  prompt: string,
+  language: string
+): Promise<string> {
   await elasticClient.indices.refresh({ index });
 
   const result = await elasticClient.search({

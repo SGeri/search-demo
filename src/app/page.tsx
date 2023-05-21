@@ -4,17 +4,45 @@ import Prompt from "@/components/Prompt";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-between p-24 gap-5">
-      <div className="border-2 border-blue-200 p-20">
-        {/* @ts-expect-error */}
-        <ListView />
+    <main className="flex flex-col items-center justify-between mx-5 py-8 gap-5">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold">Advanced Search</h1>
+        <h2>
+          A demo project to showcase the ability of ElasticSearch combined with
+          GPT-3
+        </h2>
       </div>
-      <div className="border-2 border-blue-200 p-20">
-        <Picker />
+
+      <div className="grid grid-cols-2 gap-5">
+        <Block title="Documents">
+          {/* @ts-expect-error */}
+          <ListView />
+        </Block>
+        <Block title="Upload">
+          <Picker />
+        </Block>
       </div>
-      <div className="border-2 border-blue-200 p-20">
+
+      <Block title="Search" className="w-[80%] max-w-4xl">
         <Prompt />
-      </div>
+      </Block>
     </main>
+  );
+}
+
+type BlockProps = {
+  title: string;
+  className?: string;
+  children: React.ReactNode;
+};
+
+function Block({ title, className, children }: BlockProps) {
+  return (
+    <div
+      className={`border-2 border-blue-300 px-20 py-8 rounded-md shadow-2xl ${className}`}
+    >
+      <h3 className="text-center font-md font-bold mb-4">{title}</h3>
+      {children}
+    </div>
   );
 }
